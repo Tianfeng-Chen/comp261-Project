@@ -10,22 +10,17 @@ with open('collision_data.json', 'r') as f:
         except json.JSONDecodeError:
             continue
 
-# Extract collision hour and count
-collision_hours = {}
+# Extract collision times and dates
+collision_times = []
 for item in data:
-    try:
-        collision_time = item['collision_time']
-        collision_hour = int(collision_time.split(':')[0])
-        if collision_hour not in collision_hours:
-            collision_hours[collision_hour] = 0
-        collision_hours[collision_hour] += 1
-    except KeyError:
-        continue
+    time_str = item['crash_time']
+    hour = int(time_str.split(':')[0])
+    collision_times.append(hour)
 
-# Plot distribution of collision numbers by hour
-plt.figure(figsize=(10, 6))
-plt.bar(collision_hours.keys(), collision_hours.values())
-plt.xlabel('Hour')
+# Plot histogram of collisions per hour
+plt.hist(collision_times, bins=24, edgecolor='black', alpha=0.5)
+plt.xticks(range(24))
+plt.xlabel('Hour of the Day')
 plt.ylabel('Number of Collisions')
-plt.title('Distribution of Collisions by Hour')
+plt.title('Distribution of Collisions by Time of Day')
 plt.show()
