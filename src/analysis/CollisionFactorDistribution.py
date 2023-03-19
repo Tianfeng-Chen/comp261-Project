@@ -38,7 +38,7 @@ sorted_counts = sorted(factor_counts.items(), key=lambda x: x[1], reverse=True)
 top_counts = dict(sorted_counts[:20])
 
 # Increase figure size and plot a bar chart of the top 20 factors that caused the collision for both vehicles
-plt.figure(figsize=(10,6))
+plt.figure(figsize=(10, 6))
 plt.bar(top_counts.keys(), top_counts.values(), color='blue')
 plt.xticks(rotation=90)
 plt.xlabel('Contributing Factor')
